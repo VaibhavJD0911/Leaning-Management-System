@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+    --bg:#f5f2ed; --surface:#ffffff; --surface-2:#edeae3;
+    --ink:#1c1c1a; --ink-muted:#6b6860;
+    --accent:#2d5a3d; --accent-lt:#3d7a54; --accent-bg:#eaf2ec;
+    --border:#d8d4cc; --nav-bg:#1c1c1a;
+    --gold:#b07d2e;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+}
+
+body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.28;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── Navbar ── */
+.navbar {
+    position: sticky; top: 0; z-index: 100;
+    height: 60px;
+    background: var(--nav-bg);
+    border-bottom: 3px solid var(--accent);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 36px;
+}
+.logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px; font-weight: 400;
+    color: #f5f2ed;
+    display: flex; align-items: center; gap: 10px;
+}
+.logo::before {
+    content: '';
+    display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--accent-lt);
+}
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-right a {
+    font-size: 13px; font-weight: 500; color: #f5f2ed;
+    text-decoration: none; padding: 7px 14px;
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 6px;
+    transition: background 0.2s;
+}
+.nav-right a:hover { background: rgba(255,255,255,0.08); }
+
+/* ── Page wrapper ── */
+.page-wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 52px 40px;
+    position: relative; z-index: 1;
+}
+
+/* ── Top bar ── */
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.5s ease 0.1s both;
+}
+.top-left { display: flex; flex-direction: column; gap: 6px; }
+.top-eyebrow {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent);
+}
+.top h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px; font-weight: 400;
+    letter-spacing: -0.3px; color: var(--ink);
+}
+
+/* ── Search ── */
+.search {
+    display: flex; gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface);
+    animation: fadeUp 0.5s ease 0.2s both;
+}
+.search input {
+    padding: 11px 16px;
+    border: none; outline: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; color: var(--ink);
+    background: transparent;
+    width: 260px;
+}
+.search input::placeholder { color: #b0aca5; font-weight: 300; }
+.search button {
+    padding: 11px 20px;
+    background: var(--accent); color: #fff;
+    border: none; border-left: 1px solid var(--border);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: auto;
+}
+.search button:hover { background: var(--accent-lt); }
+
+/* ── Grid ── */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    animation: fadeUp 0.5s ease 0.3s both;
+}
+
+/* ── Course card ── */
+.course-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+.course-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent); opacity: 0;
+    transition: opacity 0.2s;
+}
+.course-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(28,28,26,0.09); }
+.course-card:hover::before { opacity: 1; }
+
+.course-card img {
+    width: 100%; height: 160px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border);
+}
+
+.info { padding: 18px 18px 14px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+
+.info h3 {
+    font-size: 15px; font-weight: 500;
+    color: var(--ink); line-height: 1.4;
+}
+
+.rating {
+    font-size: 13px; color: var(--ink-muted);
+    display: flex; align-items: center; gap: 5px;
+    font-weight: 300;
+}
+.rating-star { color: var(--gold); font-size: 12px; }
+.rating small { font-size: 11px; color: #b0aca5; }
+
+.price {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 4px;
+}
+.old-price { text-decoration: line-through; color: #b0aca5; font-size: 13px; }
+.new-price { font-weight: 500; font-size: 15px; color: var(--ink); }
+.discount {
+    font-size: 11px; font-weight: 500;
+    color: var(--accent); background: var(--accent-bg);
+    border: 1px solid rgba(45,90,61,0.2);
+    padding: 2px 7px; border-radius: 4px;
+}
+
+.enroll-btn {
+    display: block; width: 100%;
+    padding: 13px;
+    background: var(--ink); color: #fff;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer;
+    border-top: 1px solid var(--border);
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+}
+.enroll-btn:hover { background: var(--accent); }
+
+/* ── Empty state ── */
+.empty { color: var(--ink-muted); font-weight: 300; font-size: 15px; padding: 40px 0; }
+
+@keyframes fadeUp {
+    from { opacity:0; transform:translateY(16px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+
+@media (max-width: 760px) {
+    .page-wrap { padding: 32px 20px; }
+    .top { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .search input { width: 200px; }
+}
