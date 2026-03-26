@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Progress | LMS</title>
+    <link rel="stylesheet" href="{% static 'css/progress.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">LMS</div>
+    <div class="nav-right">
+        <a href="{% url 'my_courses' %}" class="nav-link">My Courses</a>
+        <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+    </div>
+</nav>
+
+<div class="page-wrap">
+
+    <div class="page-header">
+        <p class="page-eyebrow">Student</p>
+        <h2>Learning Progress</h2>
+    </div>
+
+    {% if progress %}
+        <div class="cards-list">
+            {% for p in progress %}
+                <div class="progress-card">
+                    <h4>{{ p.enrollment.course.title }}</h4>
+                    <p class="progress-meta">{{ p.percentage }}% complete</p>
+                    <div class="bar">
+                        <div class="fill" style="width: {{ p.percentage }}%"></div>
+                    </div>
+                    <span class="progress-percent">{{ p.percentage }}%</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">No progress data available yet.</div>
+    {% endif %}
+
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Students | LMS</title>
+    <link rel="stylesheet" href="{% static 'css/view_student.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">LMS</div>
+    <a href="{% url 'instructor_courses' %}" class="nav-link">My Courses</a>
+</nav>
+
+<div class="page-wrap">
+
+    <div class="page-header">
+        <p class="page-eyebrow">Instructor View</p>
+        <h2>Enrolled Students</h2>
+        <p class="course-name-sub">{{ course.title }}</p>
+
+        {% if enrollments %}
+            <span class="students-count">
+                {{ enrollments|length }} student{{ enrollments|length|pluralize }} enrolled
+            </span>
+        {% endif %}
+    </div>
+
+    {% if enrollments %}
+        <ul>
+            {% for enrollment in enrollments %}
+                <li>
+
+                    <div class="student-left">
+                        <span class="student-name">
+                            {{ enrollment.student.username }}
+                        </span>
+
+                        <span class="enroll-date">
+                            Enrolled {{ enrollment.enrolled_at|date:"d M Y" }}
+                        </span>
+                    </div>
+
+                    <div class="student-right">
+
+                        {% if enrollment.review %}
+                            <span class="reviewed-badge yes">
+                                ★ {{ enrollment.review.rating }}/5 · Reviewed
+                            </span>
+                        {% else %}
+                            <span class="reviewed-badge no">
+                                Not reviewed
+                            </span>
+                        {% endif %}
+
+                    </div>
+
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <p>No students enrolled yet.</p>
+    {% endif %}
+
+    <a href="{% url 'instructor_courses' %}" class="back-link">
+        ← <span>Back to My Courses</span>
+    </a>
+
+</div>
+
+</body>
+</html>

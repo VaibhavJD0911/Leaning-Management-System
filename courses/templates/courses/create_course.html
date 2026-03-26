@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Course | LMS</title>
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">LMS</div>
+    <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+</nav>
+
+<div class="page">
+    <div class="card">
+
+        <div class="card-brand">
+            <div class="card-brand-dot"></div>
+            <span class="card-brand-text">Instructor Tools</span>
+        </div>
+
+        <h2>Create a new course</h2>
+        <p class="subtitle">Fill in the details below to publish your course.</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="field">
+                <label for="title">Course Title</label>
+                <input type="text" id="title" name="title" placeholder="e.g. Complete Python Bootcamp" required>
+            </div>
+
+            <div class="field">
+                <label for="description">Course Description</label>
+                <textarea id="description" name="description" placeholder="Describe what students will learn..." required></textarea>
+            </div>
+
+            <div class="field">
+                <label for="image">Course Thumbnail</label>
+                <input type="file" id="image" name="image" accept="image/*">
+            </div>
+
+            <div class="field-divider"></div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label for="price">Price (₹)</label>
+                    <input type="number" id="price" name="price" step="0.01" placeholder="e.g. 999" required>
+                </div>
+                <div class="field">
+                    <label for="discount_percent">Discount (%)</label>
+                    <input type="number" id="discount_percent" name="discount_percent" min="0" max="90" placeholder="Optional">
+                </div>
+            </div>
+
+            <div class="field checkbox-field">
+                <label for="discount_active">
+                    <input type="checkbox" id="discount_active" name="discount_active">
+                    Enable discount pricing
+                </label>
+            </div>
+
+            <button type="submit">Publish Course</button>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

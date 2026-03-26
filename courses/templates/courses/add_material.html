@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Course Material | LMS</title>
+    <link rel="stylesheet" href="{% static 'css/material_form.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">LMS</div>
+    <div class="nav-right">
+        <span class="course-name">{{ course.title }}</span>
+        <a href="{% url 'dashboard' %}" class="back">Back</a>
+    </div>
+</nav>
+
+<main class="page">
+    <div class="form-card">
+
+        <div class="card-brand">
+            <div class="card-brand-dot"></div>
+            <span class="card-brand-text">Course Materials</span>
+        </div>
+
+        <h2>Add study material</h2>
+        <p class="subtitle">Upload videos or PDFs for your students.</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div>
+                <label for="title">Material Title</label>
+                <input type="text" id="title" name="title" placeholder="e.g. Introduction to Django" required>
+            </div>
+
+            <div>
+                <label for="material_type">Material Type</label>
+                <select id="material_type" name="material_type" required>
+                    <option value="" disabled selected>Select type</option>
+                    <option value="video">Video</option>
+                    <option value="pdf">PDF</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Upload File</label>
+                <div class="upload-zone">
+                    <label class="upload-label" for="file">
+                        <span class="upload-icon">↑</span>
+                        <span class="upload-text"><span>Click to upload</span> or drag and drop</span>
+                    </label>
+                    <input type="file" id="file" name="file" required>
+                </div>
+            </div>
+
+            <button type="submit">Upload Material</button>
+        </form>
+    </div>
+</main>
+
+</body>
+</html>

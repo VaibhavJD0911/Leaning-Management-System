@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Reviews | LMS</title>
+    <link rel="stylesheet" href="{% static 'css/instructor_course_reviews.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">LMS</div>
+    <a href="{% url 'instructor_courses' %}" class="nav-link">My Courses</a>
+</nav>
+
+<div class="page-wrap">
+
+    <div class="page-header">
+        <p class="page-eyebrow">Instructor</p>
+        <h2>Course Reviews & Ratings</h2>
+    </div>
+
+    {% if courses %}
+        {% for course in courses %}
+            <div class="course-review-box">
+
+                <div class="course-header">
+                    <h3>{{ course.title }}</h3>
+                    <div class="rating-summary">
+                        <strong>★ {{ course.average_rating }}</strong> / 5
+                        <span style="color:var(--border)">·</span>
+                        {{ course.total_reviews }} review{{ course.total_reviews|pluralize }}
+                    </div>
+                </div>
+
+                <div class="review-cards">
+                    {% if course.reviews.all %}
+                        {% for review in course.reviews.all %}
+                            <div class="review-card">
+                                <div class="review-top">
+                                    <span class="reviewer-name">{{ review.student.username }}</span>
+                                    <span class="stars">★ {{ review.rating }} / 5</span>
+                                </div>
+                                <p class="review-comment">{{ review.comment }}</p>
+                                <span class="review-date">{{ review.created_at|date:"d M Y" }}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-reviews">No reviews yet for this course.</p>
+                    {% endif %}
+                </div>
+
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">You haven't created any courses yet.</div>
+    {% endif %}
+
+    <a href="{% url 'instructor_courses' %}" class="back-link">← <span>Back to My Courses</span></a>
+
+</div>
+</body>
+</html>

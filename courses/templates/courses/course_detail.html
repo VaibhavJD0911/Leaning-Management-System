@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.title }} | LMS</title>
+    <link rel="stylesheet" href="{% static 'css/course_detail.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">LMS</div>
+    <a href="{% url 'my_courses' %}" class="nav-link">My Courses</a>
+</nav>
+
+<div class="page-wrap">
+
+    <!-- Course Header -->
+    <div class="course-header">
+        <p class="course-eyebrow">Course Detail</p>
+        <h2>{{ course.title }}</h2>
+        <p>{{ course.description }}</p>
+        <div class="rating-badge">
+            <span class="rating-star-icon">★</span>
+            <strong>{{ course.average_rating }}</strong> / 5
+            <span style="color:var(--border)">|</span>
+            {{ course.total_reviews }} review{{ course.total_reviews|pluralize }}
+        </div>
+    </div>
+
+    <!-- Course Materials -->
+    <section class="section">
+        <h3 class="section-title">Course Materials</h3>
+
+        {% if materials %}
+            <div class="materials-list">
+                {% for material in materials %}
+                    <div class="material-item">
+                        <div class="material-left">
+                            <span class="material-badge">{{ material.material_type|upper }}</span>
+                            <span class="material-title">{{ material.title }}</span>
+                        </div>
+                        <a href="{{ material.file.url }}" target="_blank" class="material-view">View</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">No materials uploaded yet.</div>
+        {% endif %}
+    </section>
+
+    <!-- Your Review -->
+    <section class="section">
+        <h3 class="section-title">Your Review</h3>
+
+        {% if student_review %}
+            <div class="your-review-box">
+                <p class="review-rating">Rating: <strong>★ {{ student_review.rating }} / 5</strong></p>
+                <p>{{ student_review.comment }}</p>
+            </div>
+            <a href="{% url 'add_review' course.id %}" class="action-link secondary">Edit Review</a>
+        {% else %}
+            <div class="empty-state">You haven't reviewed this course yet.</div>
+            <a href="{% url 'add_review' course.id %}" class="action-link primary">Write a Review</a>
+        {% endif %}
+    </section>
+
+    <!-- All Reviews -->
+    <section class="section">
+        <h3 class="section-title">All Student Reviews</h3>
+
+        {% if reviews %}
+            <div class="reviews-list">
+                {% for review in reviews %}
+                    <div class="review-card">
+                        <div class="review-card-top">
+                            <span class="reviewer-name">{{ review.student.username }}</span>
+                            <span class="review-stars">★ {{ review.rating }} / 5</span>
+                        </div>
+                        <p class="review-text">{{ review.comment }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">No reviews yet for this course.</div>
+        {% endif %}
+    </section>
+
+    <a href="{% url 'my_courses' %}" class="back-link">← <span>Back to My Courses</span></a>
+
+</div>
+</body>
+</html>

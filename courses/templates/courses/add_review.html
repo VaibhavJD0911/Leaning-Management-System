@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Course | LMS</title>
+    <link rel="stylesheet" href="{% static 'css/add_review.css' %}">
+</head>
+<body>
+
+<div class="footer-line"></div>
+
+<div class="review-container">
+
+    <div class="card-brand">
+        <div class="card-brand-dot"></div>
+        <span class="card-brand-text">Student Review</span>
+    </div>
+
+    <h2>{% if review %}Edit your review{% else %}Leave a review{% endif %}</h2>
+    <p class="course-subtitle">{{ course.title }}</p>
+
+    {% if error %}
+        <div class="error-box">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div>
+            <label for="rating">Rating</label>
+            <select name="rating" id="rating" required>
+                <option value="" disabled selected>Select a rating</option>
+                {% for i in "12345" %}
+                    <option value="{{ i }}" {% if review and review.rating == i|add:"0" %}selected{% endif %}>
+                        {{ i }} star{% if i != "1" %}s{% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="comment">Your Review</label>
+            <textarea name="comment" id="comment" rows="5" placeholder="Share your honest experience with this course..." required>{% if review %}{{ review.comment }}{% endif %}</textarea>
+        </div>
+
+        <button type="submit">
+            {% if review %}Update Review{% else %}Submit Review{% endif %}
+        </button>
+    </form>
+
+    <a href="{% url 'course_detail' course.id %}" class="back-link">
+        ← <span>Back to Course</span>
+    </a>
+
+</div>
+
+</body>
+</html>

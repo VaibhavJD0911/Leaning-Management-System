@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Courses | LMS</title>
+    <link rel="stylesheet" href="{% static 'css/progress.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">LMS</div>
+    <div class="nav-right">
+        <a href="{% url 'browse_courses' %}" class="nav-link">Browse Courses</a>
+        <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+    </div>
+</nav>
+
+<div class="page-wrap">
+
+    <div class="page-header">
+        <p class="page-eyebrow">Student</p>
+        <h2>My Enrolled Courses</h2>
+    </div>
+
+    {% if enrollments %}
+        <div class="cards-list">
+            {% for e in enrollments %}
+                <div class="progress-card">
+                    <h4>{{ e.course.title }}</h4>
+                    <p class="progress-meta">Enrolled {{ e.enrolled_at|date:"d M Y" }}</p>
+                    <a href="{% url 'course_detail' e.course.id %}" class="course-link">Go to Course</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            You haven't enrolled in any courses yet.
+            <br><br>
+            <a href="{% url 'browse_courses' %}" style="color:var(--accent);font-weight:500">Browse available courses →</a>
+        </div>
+    {% endif %}
+
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Courses | LMS</title>
+    <link rel="stylesheet" href="{% static 'css/courses.css' %}" />
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">LMS</div>
+    <div class="nav-right">
+        <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+    </div>
+</nav>
+
+<div class="page-wrap">
+
+    <div class="top">
+        <div class="top-left">
+            <p class="top-eyebrow">Catalogue</p>
+            <h2>What to learn next</h2>
+        </div>
+
+        <form method="GET" class="search">
+            <input type="text" name="q" placeholder="Search courses..." value="{{ query }}">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="grid">
+        {% for course in courses %}
+        <div class="course-card">
+            {% if course.image %}
+                <img src="{{ course.image.url }}" alt="{{ course.title }}">
+            {% else %}
+                <img src="{% static 'images/default-course.png' %}" alt="Course image">
+            {% endif %}
+
+            <div class="info">
+                <h3>{{ course.title }}</h3>
+                <p class="rating">
+                    <span class="rating-star">★</span>
+                    <strong>{{ course.average_rating }}</strong> / 5
+                    <small>({{ course.total_reviews }} reviews)</small>
+                </p>
+                <p class="price">
+                    {% if course.discount_active %}
+                        <span class="old-price">₹{{ course.price }}</span>
+                        <span class="new-price">₹{{ course.final_price }}</span>
+                        <span class="discount">{{ course.discount_percent }}% OFF</span>
+                    {% else %}
+                        <span class="new-price">₹{{ course.price }}</span>
+                    {% endif %}
+                </p>
+            </div>
+
+            <form method="GET" action="{% url 'create_payment' course.id %}">
+                <button type="submit" class="enroll-btn">Buy Course</button>
+            </form>
+        </div>
+        {% empty %}
+            <p class="empty">No courses found matching your search.</p>
+        {% endfor %}
+    </div>
+
+</div>
+</body>
+</html>
