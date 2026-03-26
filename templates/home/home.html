@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS | Learn Smarter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+
+<div class="footer-line"></div>
+
+<div class="container">
+    <div class="panel-left">
+        <div class="wordmark">
+            <div class="wordmark-dot"></div>
+            <span class="wordmark-text">LMS Platform</span>
+        </div>
+        <div class="hero">
+            <span class="hero-eyebrow">Education Infrastructure</span>
+            <h1>Learn smarter.<br><em>Teach</em> better.</h1>
+            <p class="subtitle">
+                A unified platform for courses, enrollments, and outcomes — built for institutions that take education seriously.
+            </p>
+            <div class="buttons">
+                <a href="{% url 'login' %}" class="btn primary">Log in</a>
+                <a href="{% url 'register' %}" class="btn secondary">Create account</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-right">
+        <p class="panel-label">Platform at a glance</p>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value">12k+</div>
+                <div class="stat-label">Active learners</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">340</div>
+                <div class="stat-label">Courses live</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">98%</div>
+                <div class="stat-label">Completion rate</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">4.9</div>
+                <div class="stat-label">Avg. rating</div>
+            </div>
+        </div>
+        <div class="features">
+            <div class="feature-row">
+                <div class="feature-icon">◈</div>
+                <div class="feature-text">
+                    <strong>Structured Course Management</strong>
+                    <span>Organise content, materials, and assessments in one place.</span>
+                </div>
+            </div>
+            <div class="feature-row">
+                <div class="feature-icon">◉</div>
+                <div class="feature-text">
+                    <strong>Enrollment & Progress Tracking</strong>
+                    <span>Monitor every learner's journey with real-time data.</span>
+                </div>
+            </div>
+            <div class="feature-row">
+                <div class="feature-icon">◈</div>
+                <div class="feature-text">
+                    <strong>Integrated Payments</strong>
+                    <span>Seamless billing and financial reporting built in.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

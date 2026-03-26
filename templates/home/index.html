@@ -1,0 +1,44 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <h2>Admin Dashboard</h2>
+    <p class="dashboard-sub">Manage your platform — courses, enrollments, payments, and users.</p>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">&#9670;</div>
+            <h3>Courses</h3>
+            <p>Create, edit, and organise all published and draft courses.</p>
+            <a href="/admin/courses/course/">Open</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">&#9632;</div>
+            <h3>Enrollments</h3>
+            <p>View and manage student enrollments and progress records.</p>
+            <a href="/admin/courses/enrollment/">Open</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">&#9670;</div>
+            <h3>Payments</h3>
+            <p>Track transactions, invoices, and financial reporting.</p>
+            <a href="/admin/payments/payment/">Open</a>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">&#9632;</div>
+            <h3>Users</h3>
+            <p>Manage accounts, roles, and permissions across the platform.</p>
+            <a href="/admin/accounts/user/">Open</a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
