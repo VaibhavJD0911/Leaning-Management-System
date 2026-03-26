@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+:root {
+    --bg:        #f5f2ed;
+    --surface:   #ffffff;
+    --ink:       #1c1c1a;
+    --ink-muted: #6b6860;
+    --accent:    #2d5a3d;
+    --accent-lt: #3d7a54;
+    --accent-bg: #eaf2ec;
+    --border:    #d8d4cc;
+}
+
+/* ── Override Django admin base colours ── */
+#header {
+    background: var(--ink) !important;
+    color: #f5f2ed !important;
+    font-family: 'DM Sans', sans-serif !important;
+    border-bottom: 3px solid var(--accent) !important;
+    padding: 12px 20px !important;
+}
+
+#site-name a, #site-name {
+    font-family: 'DM Serif Display', serif !important;
+    font-size: 20px !important;
+    font-weight: 400 !important;
+    color: #f5f2ed !important;
+    text-decoration: none !important;
+    letter-spacing: 0px !important;
+}
+
+#branding {
+    display: flex;
+    align-items: center;
+}
+
+/* ── Sidebar / nav ── */
+#nav-sidebar {
+    background: var(--surface) !important;
+    border-right: 1px solid var(--border) !important;
+    font-family: 'DM Sans', sans-serif !important;
+}
+
+/* ── Body ── */
+body {
+    font-family: 'DM Sans', sans-serif !important;
+    background: var(--bg) !important;
+    color: var(--ink) !important;
+}
+
+/* ── Links ── */
+a:link, a:visited {
+    color: var(--accent) !important;
+}
+
+a:hover {
+    color: var(--accent-lt) !important;
+}
+
+/* ── Module headers ── */
+.module h2, .module caption {
+    background: var(--ink) !important;
+    color: #f5f2ed !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    padding: 10px 14px !important;
+}
+
+/* ── Buttons ── */
+.submit-row input, .button, input[type=submit] {
+    background: var(--accent) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    padding: 9px 20px !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+}
+
+.submit-row input:hover, .button:hover {
+    background: var(--accent-lt) !important;
+}
+
+/* ── Dashboard ── */
+.dashboard {
+    padding: 32px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.dashboard h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+}
+
+.dashboard-sub {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin-bottom: 36px;
+    font-weight: 300;
+}
+
+/* ── Cards ── */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    background: var(--surface);
+    padding: 28px 24px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    transform: translateY(-2px);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--accent-bg);
+    border: 1px solid rgba(45,90,61,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 15px;
+    margin-bottom: 16px;
+}
+
+.card h3 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 6px;
+}
+
+.card p {
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.card a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--ink);
+    color: white !important;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: background 0.2s ease, gap 0.2s ease;
+}
+
+.card a::after {
+    content: '→';
+    transition: transform 0.2s ease;
+}
+
+.card a:hover {
+    background: var(--accent) !important;
+    color: white !important;
+}
+
+.card a:hover::after {
+    transform: translateX(3px);
+}
+
+/* ── Breadcrumbs ── */
+div.breadcrumbs {
+    background: var(--surface) !important;
+    border-bottom: 1px solid var(--border) !important;
+    color: var(--ink-muted) !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 13px !important;
+    padding: 10px 20px !important;
+}
+
+div.breadcrumbs a {
+    color: var(--accent) !important;
+}
+
+/* ── Table ── */
+#result_list th {
+    background: var(--bg) !important;
+    color: var(--ink-muted) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    font-weight: 500 !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+
+#result_list tr:hover td {
+    background: #faf8f4 !important;
+}
+
+/* ── Pagination ── */
+.paginator {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 13px !important;
+}
+
+/* ── Messages / alerts ── */
+ul.messagelist li {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 13px !important;
+    border-radius: 6px !important;
+    border-left: 3px solid var(--accent) !important;
+    background: var(--accent-bg) !important;
+    color: var(--ink) !important;
+}
