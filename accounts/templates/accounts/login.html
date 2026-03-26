@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | LMS</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body>
+
+<div class="footer-line"></div>
+
+<div class="container">
+    <div class="card">
+
+        <div class="card-brand">
+            <div class="card-brand-dot"></div>
+            <span class="card-brand-text">LMS Platform</span>
+        </div>
+
+        <h1>Welcome back</h1>
+        <p class="card-subtitle">Sign in to continue your learning journey.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="field-group">
+                <label class="field-label" for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required autofocus>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label" for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <button class="btn primary" type="submit">Sign in</button>
+        </form>
+
+        <a href="{% url 'register' %}" class="link">
+            Don't have an account? <span>Create one</span>
+        </a>
+
+    </div>
+</div>
+
+</body>
+</html>

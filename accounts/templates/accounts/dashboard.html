@@ -1,0 +1,118 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | LMS</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">LMS Administration</div>
+        <div class="nav-right">
+            <span class="role">{{ request.user.roles|title }}</span>
+            <a href="{% url 'logout' %}" class="logout">Sign out</a>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="container">
+
+        <!-- WELCOME -->
+        <section class="welcome">
+            <p class="welcome-eyebrow">Dashboard</p>
+            <h1>Welcome, {{ request.user.username }}</h1>
+            <p class="subtitle">
+                You are signed in as a <strong>{{ request.user.roles|title }}</strong>.
+            </p>
+        </section>
+
+        <!-- ========================= -->
+        <!-- STUDENT DASHBOARD         -->
+        <!-- ========================= -->
+        {% if request.user.roles == 'student' %}
+        <section class="section">
+            <h2 class="section-title">Your Learning</h2>
+
+            <div class="cards">
+                <a href="{% url 'browse_courses' %}" class="card">
+                    <div class="card-icon">◈</div>
+                    <h3>Browse Courses</h3>
+                    <p>Explore new courses curated for your goals and interests.</p>
+                    <span class="card-arrow">Explore →</span>
+                </a>
+
+                <a href="{% url 'my_courses' %}" class="card">
+                    <div class="card-icon">◉</div>
+                    <h3>My Courses</h3>
+                    <p>Continue where you left off across your enrolled courses.</p>
+                    <span class="card-arrow">Continue →</span>
+                </a>
+
+                <a href="{% url 'progress' %}" class="card">
+                    <div class="card-icon">◈</div>
+                    <h3>Progress</h3>
+                    <p>Track milestones, completions, and your learning journey.</p>
+                    <span class="card-arrow">View →</span>
+                </a>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- ========================= -->
+        <!-- INSTRUCTOR DASHBOARD      -->
+        <!-- ========================= -->
+        {% if request.user.roles == 'instructor' %}
+        <section class="section">
+            <h2 class="section-title">Instructor Tools</h2>
+
+            <div class="cards">
+                <a href="{% url 'create_course' %}" class="card highlight">
+                    <div class="card-icon">◈</div>
+                    <h3>Create Course</h3>
+                    <p>Build, structure, and publish a new course for your students.</p>
+                    <span class="card-arrow">Get started →</span>
+                </a>
+
+                <a href="{% url 'instructor_courses' %}" class="card">
+                    <div class="card-icon">◉</div>
+                    <h3>My Courses</h3>
+                    <p>Manage your courses, materials, enrollments, and students.</p>
+                    <span class="card-arrow">Open →</span>
+                </a>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- ========================= -->
+        <!-- ADMIN DASHBOARD           -->
+        <!-- ========================= -->
+        {% if request.user.roles == 'admin' %}
+        <section class="section">
+            <h2 class="section-title">Administration</h2>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">◈</div>
+                    <h3>Manage Users</h3>
+                    <p>Control user accounts, roles, and platform permissions.</p>
+                    <span class="card-arrow">Manage →</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">◉</div>
+                    <h3>System Overview</h3>
+                    <p>Monitor platform activity, usage metrics, and health.</p>
+                    <span class="card-arrow">View →</span>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+    </main>
+
+</body>
+</html>
