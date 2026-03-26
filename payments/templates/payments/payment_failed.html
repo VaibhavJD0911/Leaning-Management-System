@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Failed</title>
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+</head>
+<body>
+
+<div class="fail-container">
+
+    <div class="fail-card">
+
+        <!-- Icon -->
+        <div class="icon-fail">
+            ✕
+        </div>
+
+        <!-- Heading -->
+        <h1>Payment Failed</h1>
+
+        <!-- Message -->
+        <p class="message">
+            We couldn't process your payment. Please try again or use a different method.
+        </p>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Info -->
+        <div class="info">
+            <p><span>Status:</span> Failed</p>
+            <p><span>Reason:</span> Transaction could not be completed</p>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+            <a href="{% url 'browse_courses' %}" class="btn-primary">
+                Try Again →
+            </a>
+
+            <a href="{% url 'browse_courses' %}" class="btn-secondary">
+                Back to Courses
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

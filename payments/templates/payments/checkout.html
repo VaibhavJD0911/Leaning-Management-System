@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Left Section -->
+    <div class="left">
+
+        <div class="logo">● LMS Platform</div>
+
+        <h1>
+            Complete your <span>enrollment</span>
+        </h1>
+
+        <p class="subtitle">
+            Secure your access to this course and start learning immediately.
+        </p>
+
+        <div class="course-card">
+            <p class="label">Course</p>
+            <h3>{{ course.title }}</h3>
+
+            <div class="price-box">
+                <span>Total</span>
+                <span class="price">₹{{ payment.amount }}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Right Section -->
+    <div class="right">
+
+        <div class="payment-box">
+
+            <h2>Payment</h2>
+
+            <p class="desc">All transactions are secure and encrypted.</p>
+
+            <button id="pay-btn">Pay Securely</button>
+
+            <p class="note">Powered by Razorpay</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+var options = {
+    "key": "{{ razorpay_key }}",
+    "amount": "{{ amount }}",
+    "currency": "INR",
+    "name": "LMS Platform",
+    "description": "{{ course.title }}",
+    "order_id": "{{ order_id }}",
+
+    "handler": function (response){
+
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = "{% url 'verify_payment' %}";
+
+        var csrf = document.createElement("input");
+        csrf.name = "csrfmiddlewaretoken";
+        csrf.value = "{{ csrf_token }}";
+        form.appendChild(csrf);
+
+        var payment_id = document.createElement("input");
+        payment_id.name = "razorpay_payment_id";
+        payment_id.value = response.razorpay_payment_id;
+        form.appendChild(payment_id);
+
+        var order_id = document.createElement("input");
+        order_id.name = "razorpay_order_id";
+        order_id.value = response.razorpay_order_id;
+        form.appendChild(order_id);
+
+        var signature = document.createElement("input");
+        signature.name = "razorpay_signature";
+        signature.value = response.razorpay_signature;
+        form.appendChild(signature);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+};
+
+var rzp = new Razorpay(options);
+
+document.getElementById("pay-btn").onclick = function(e){
+    rzp.open();
+    e.preventDefault();
+}
+
+</script>
+
+</body>
+</html>

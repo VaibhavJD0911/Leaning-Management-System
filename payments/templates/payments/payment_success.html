@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Successful</title>
+    <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+</head>
+<body>
+
+<div class="success-container">
+
+    <div class="success-card">
+
+        <!-- Icon -->
+        <div class="icon">
+            ✓
+        </div>
+
+        <!-- Heading -->
+        <h1>Payment Successful</h1>
+
+        <!-- Message -->
+        <p class="message">
+            Your enrollment is confirmed. You now have full access to the course.
+        </p>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Info -->
+        <div class="info">
+            <p><span>Status:</span> Completed</p>
+            <p><span>Access:</span> Granted</p>
+        </div>
+
+        <!-- CTA -->
+        <a href="{% url 'my_courses' %}" class="btn-primary">
+            Go to My Courses →
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
