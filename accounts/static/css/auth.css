@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg:        #f5f2ed;
+    --surface:   #ffffff;
+    --ink:       #1c1c1a;
+    --ink-muted: #6b6860;
+    --accent:    #2d5a3d;
+    --accent-lt: #3d7a54;
+    --accent-bg: #eaf2ec;
+    --border:    #d8d4cc;
+    --border-focus: rgba(45, 90, 61, 0.4);
+    --error:     #c0392b;
+}
+
+/* ── Page ── */
+body {
+    min-height: 100vh;
+    background-color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    position: relative;
+    overflow: hidden;
+}
+
+/* subtle grid texture */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+/* decorative orb */
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -100px;
+    left: -100px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(45,90,61,0.09) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* accent bar */
+.footer-line {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-lt) 50%, transparent 100%);
+    z-index: 10;
+}
+
+/* ── Wrapper ── */
+.container {
+    width: 100%;
+    max-width: 440px;
+    padding: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Card ── */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 44px 40px;
+    box-shadow: 0 4px 32px rgba(28, 28, 26, 0.07);
+    animation: fadeUp 0.5s ease forwards;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Wordmark inside card ── */
+.card-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+.card-brand-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.card-brand-text {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+}
+
+/* ── Headings ── */
+.card h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    color: var(--ink);
+    margin-bottom: 6px;
+}
+
+.card-subtitle {
+    font-size: 14px;
+    color: var(--ink-muted);
+    font-weight: 300;
+    margin-bottom: 32px;
+}
+
+/* ── Form ── */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.field-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input::placeholder {
+    color: #b0aca5;
+    font-weight: 300;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    background: var(--surface);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(45, 90, 61, 0.12);
+}
+
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6860' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+/* ── Submit button ── */
+.btn {
+    margin-top: 6px;
+    padding: 13px;
+    border-radius: 7px;
+    border: none;
+    background: var(--accent);
+    color: #ffffff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn::after {
+    content: '→';
+    transition: transform 0.2s ease;
+}
+
+.btn:hover {
+    background: var(--accent-lt);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(45, 90, 61, 0.22);
+}
+
+.btn:hover::after {
+    transform: translateX(3px);
+}
+
+/* ── Divider ── */
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.divider span {
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-weight: 300;
+}
+
+/* ── Footer link ── */
+.link {
+    display: block;
+    margin-top: 22px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-weight: 300;
+    transition: color 0.2s ease;
+}
+
+.link span {
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.link:hover span {
+    text-decoration: underline;
+}
+
+/* ── Error messages ── */
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.errorlist li {
+    font-size: 12px;
+    color: var(--error);
+    margin-top: 4px;
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+    .card {
+        padding: 32px 24px;
+    }
+}
